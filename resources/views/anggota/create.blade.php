@@ -23,7 +23,7 @@
 
             <div class="mb-3">
                 <label class="form-label">Nama Lengkap</label>
-                <input type="text" name="nama" class="form-control" placeholder="Contoh: Zedra Novianti" value="{{ old('nama') }}">
+                <input type="text" name="nama" class="form-control" placeholder="Contoh: As Sausan Taqya Nur Hanifa" value="{{ old('nama') }}">
             </div>
 
             <div class="mb-3">

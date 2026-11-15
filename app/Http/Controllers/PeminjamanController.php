@@ -11,12 +11,31 @@ use Illuminate\Support\Facades\DB;
 class PeminjamanController extends Controller
 {
     // 1. Daftar semua transaksi
-    public function index()
-    {
-        // with() memuat relasi sekaligus agar query lebih efisien
-        $peminjamans = Peminjaman::with(['anggota', 'buku'])->latest()->paginate(10);
-        return view('peminjaman.index', compact('peminjamans'));
-    }
+    public function index(Request $request)
+{
+    $search = $request->get('search');
+    $status = $request->get('status');
+
+    $peminjamans = Peminjaman::with(['anggota', 'buku'])
+        ->when($status, function ($query) use ($status) {
+            $query->where('status', $status);
+        })
+        ->when($search, function ($query) use ($search) {
+            // tanda kurung (grup) agar OR tidak merusak filter status
+            $query->where(function ($sub) use ($search) {
+                $sub->whereHas('anggota', function ($a) use ($search) {
+                    $a->where('nama', 'LIKE', "%{$search}%");
+                })->orWhereHas('buku', function ($b) use ($search) {
+                    $b->where('judul', 'LIKE', "%{$search}%");
+                });
+            });
+        })
+        ->latest()
+        ->paginate(10)
+        ->withQueryString();
+
+    return view('peminjaman.index', compact('peminjamans', 'search', 'status'));
+}
 
     // 2. Form transaksi baru (dropdown anggota dan buku)
     public function create()
