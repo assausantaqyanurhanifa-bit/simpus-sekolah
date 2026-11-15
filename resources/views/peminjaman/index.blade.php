@@ -6,6 +6,25 @@
     <a href="{{ route('peminjaman.create') }}" class="btn btn-primary">+ Catat Transaksi Baru</a>
 </div>
 
+<form action="{{ route('peminjaman.index') }}" method="GET" class="row g-2 mb-3">
+    <div class="col-md-5">
+        <input type="text" name="search" class="form-control" placeholder="Cari nama peminjam atau judul buku..." value="{{ $search ?? '' }}">
+    </div>
+    <div class="col-md-3">
+        <select name="status" class="form-select">
+            <option value="">Semua Status</option>
+            <option value="Dipinjam" {{ ($status ?? '') == 'Dipinjam' ? 'selected' : '' }}>Dipinjam</option>
+            <option value="Dikembalikan" {{ ($status ?? '') == 'Dikembalikan' ? 'selected' : '' }}>Dikembalikan</option>
+        </select>
+    </div>
+    <div class="col-md-4">
+        <button class="btn btn-outline-secondary" type="submit">🔍 Cari</button>
+        @if(!empty($search) || !empty($status))
+            <a href="{{ route('peminjaman.index') }}" class="btn btn-outline-danger">Reset</a>
+        @endif
+    </div>
+</form>
+
 <div class="card shadow-sm">
     <div class="card-body p-0">
         <table class="table table-hover table-striped mb-0">

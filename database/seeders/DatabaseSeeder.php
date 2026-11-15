@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
 
         // Data buku contoh
         $bukus = [
-            ['BK-001', 'Pemrograman Web dengan Laravel', 'Budi Raharjo', 'Informatika', 2022, 5],
+            ['BK-001', 'Pemrograman Web dengan Laravell', 'Budi Raharjo', 'Informatika', 2022, 5],
             ['BK-002', 'Basis Data MySQL', 'Abdul Kadir', 'Andi', 2020, 4],
             ['BK-003', 'Rekayasa Perangkat Lunak', 'Rosa A.S.', 'Informatika', 2018, 3],
             ['BK-004', 'Algoritma dan Pemrograman', 'Rinaldi Munir', 'Informatika', 2016, 6],
@@ -35,9 +35,9 @@ class DatabaseSeeder extends Seeder
 
         // Data anggota contoh
         $anggotas = [
-            ['Anggota Contoh Satu', 'Yogyakarta', '081234567890', 'anggota1@contoh.test'],
-            ['Anggota Contoh Dua', 'Sleman', '081298765432', 'anggota2@contoh.test'],
-            ['Anggota Contoh Tiga', 'Bantul', '085612345678', 'anggota3@contoh.test'],
+            ['Adam', 'Yogyakarta', '081234567890', 'anggota1@contoh.test'],
+            ['Hawa', 'Sleman', '081298765432', 'anggota2@contoh.test'],
+            ['Budi', 'Bantul', '085612345678', 'anggota3@contoh.test'],
         ];
         foreach ($anggotas as [$nama, $alamat, $no_hp, $email]) {
             Anggota::firstOrCreate(['email' => $email], compact('nama', 'alamat', 'no_hp'));
